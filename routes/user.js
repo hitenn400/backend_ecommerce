@@ -13,6 +13,7 @@ const {signup,
     managerAllUser,
     adminGetOneUser,
     adminUpdateOneUserDetails,
+    getAllPublicUsers,
     adminDeleteUserDetails}=require('../controllers/userController');
 const { isLoggedIn,customRole } = require('../middlewares/user');
 router.route('/signup').post(signup);
@@ -23,6 +24,7 @@ router.route("/password/reset/:token").post(passwordReset);
 router.route("/userdashboard").get(isLoggedIn,getLoggedInUserDetails);
 router.route("/password/update").post(isLoggedIn,changePassword);
 router.route("/userdashboard/update").post(isLoggedIn,updateUserDetails);
+router.route("/userdashboard/public/users").post(isLoggedIn, getAllPublicUsers);
 // admin only routes
 router.route("/admin/users").get(isLoggedIn,customRole('admin'),adminAllUser);
 router.route("/admin/users/:id").get(isLoggedIn,customRole('admin'),adminGetOneUser)
